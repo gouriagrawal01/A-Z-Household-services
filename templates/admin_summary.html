@@ -1,0 +1,131 @@
+
+  {% extends "admin_layout.html" %}
+  {% block content  %}
+        <div class="section">        
+            <h3>Services</h3>
+            {% if services %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Service Name</th>
+                        <th>Base Price</th>
+                        <th>Time Required</th>
+                        <th>Action<th></th></th>
+                    </tr>
+                </thead>
+                {% for service in services %}
+                <tbody>
+                    <tr>
+                        <td>{{service.id}}</td>
+                        <td>{{service.name}}</td>
+                        <td>{{service.price}}</td>
+                        <td>{{service.time_required}}</td>
+                        <td><a href="/edit_service/{{service.id}}/{{name}}"  type="button"  class="btn btn-success">Edit</a>
+                           <a href="/delete_service/{{service.id}}/{{name}}" type="button" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    
+                  
+                </tbody>
+                {% endfor %}
+            </table>
+            {% else %}
+                <h2 class="center">No Services Available</h2>
+            {% endif %}
+            <a href="/service/{{name}}" class="add-service">+ New Service</a>
+        </div>
+    
+        <div class="section">
+            <h3>Professionals</h3>
+            {% if professionals %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Experience (Yrs)</th>
+                        <th>Service Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for professional in professionals  %}
+                <tbody>
+                    <tr>
+                        <td>{{professional.id}}</td>
+                        <td>{{professional.name}}</td>
+                        <td>{{professional.experience}}</td>
+                        <td>{{professional.service}}</td>
+                        <td><button type="button" href="#" class="btn btn-success">Approve</button>
+                            <button type="button" href="#" class="btn btn-danger">Block</button></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            {% else %}
+                <h2 class="center">No Professionals Available</h2>
+            {% endif %}
+        </div>
+        
+        <div class="section">
+            <h3>Customers</h3>
+            {% if customers %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Pin Code</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for customer in customers  %}
+                {% if customer.role==1 %}
+                <tbody>
+                    <tr>
+                        <td>{{customer.id}}</td>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.address}}</td>
+                        <td>{{customer.pin_code}}</td>
+                        <td>
+                            <button type="button" href="#" class="btn btn-danger">Block</button></td>
+                    </tr>
+                </tbody>
+                {% endif %}
+                {% endfor %}
+            </table>
+            {% else %}
+                <h2 class="center">No Customer Available</h2>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <h3>Service Requests</h3>
+            {% if service_requests %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Assigned Professional (if any)</th>
+                        <th>Requested Dt</th>
+                        <th>Status (R/A/C)</th>
+                    </tr>
+                </thead>
+                {% for service_request in service_requests %}
+                <tbody>
+                    <tr>
+                        <td>{{service_request.id}}</td>
+                        <td>{{service_request.feedback}}</td>
+                        <td>{{service_request.dor}}</td>
+                        <td>{{service_request.status}}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            {% else %}
+                <h2 class="center"> No Requests Available</h2>
+            {% endif %}
+        </div>
+    
+    
+        {% endblock  %}

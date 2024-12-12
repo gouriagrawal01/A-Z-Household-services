@@ -10,44 +10,51 @@
 </head>
 <body>
     <div class="my_container">
-        <h1 class="center">Cine World</h1>
+        <h1 class="center">Household Services</h1>
         <div class="my_panel">
-            <h2 class="center">Signup</h2>
-            <form action="/prof_signup" method="POST">
+            <h2 class="center">Professional Signup</h2>
+            <form action="/prof_signup" enctype="multipart/form-data" method="POST">
             <div class="input_form">
                 <div class="mb-3">
-                    <label for="user_name" class="form-label">UserName(E-mail)</label>
+                    <label for="user_name" class="form-label">UserName(E-mail):</label>
                     <input type="email" class="form-control" name="email"  id="user_name" placeholder="iitm@study.ac.in">
                   </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control" name="password"  id="password" placeholder="password">
                   </div>
                 <div class="mb-3">
-                    <label for="fullname" class="form-label">Full Name</label>
+                    <label for="fullname" class="form-label">Full Name:</label>
                     <input type="text" class="form-control" name="name"  id="fullname" placeholder="full name">
                   </div>
 
                   <div class="mb-3">
-                    <label for="service" class="form-label">Service Name</label>
+                    <label for="service" class="form-label">Service Name:</label>
                     <input type="text" class="form-control" name="service"  id="service" placeholder="service name">
                   </div>
                   <div class="mb-3">
-                    <label for="experience" class="form-label">Experience(in yrs)</label>
+                    <label for="experience" class="form-label">Experience(in yrs):</label>
                     <input type="text" class="form-control" name="experience"  id="experience" placeholder="experience">
                   </div>
+
                   <div class="mb-3">
-                    <label for="location" class="form-label">Location</label>
+                    <label for="file_upload" class="form-label">Document:</label>
+                    <input type="file" class="form-control" name="file_upload"  id="file_upload">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="location" class="form-label">Location:</label>
                     <input type="text" class="form-control" name="address"  id="location" placeholder="">
                   </div>
                   <div class="mb-3">
-                    <label for="pincode" class="form-label">Pin code</label>
+                    <label for="pincode" class="form-label">Pin code:</label>
                     <input type="text" class="form-control"name="pin_code"  id="pincode" placeholder="">
                   </div>
                   
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Signup</button>
                     Existing User?<a href="/login">Login</a>
+                    <div class="error_msg">{{msg}}</div>
                   </div>             
             </div>
           </form>

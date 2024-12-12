@@ -1,0 +1,136 @@
+
+*{
+    margin: 10px;
+}
+
+.my_container{
+    border: 2px solid black;
+    height: auto;
+    width: auto;
+    text-align: center;
+    margin: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.my_panel{
+    width: auto;
+    margin: auto;
+    height: auto;
+    border: 1px dashed black;
+    text-align: center;
+}
+
+.input_form{
+    border: 1px solid blue;
+    height: auto;
+    width:auto;
+    margin: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.heading{
+    text-align: left;
+    margin: auto;
+    color:cornflowerblue
+}
+
+.functions{
+    border: 1px solid blueviolet;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    text-align: justify;
+}
+
+.center{
+    text-align: center;
+    margin: auto;
+    color: #1565C0;
+
+}
+
+.error_msg{
+    text-align: center;
+    margin: auto;
+    color: red;   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.header a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: blue;
+}
+.section {
+    margin-top: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+.add-service {
+    color: green;
+    margin-top: 10px;
+    display: block;
+}
+
+.profile-link {
+    float: right;
+    color: orange;
+    text-decoration: none;
+}
+
+.close-link {
+    color: green;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+service-options {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    text-align: center;
+}
+.service-options div {
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 100px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+.service-options div:hover {
+    background-color: #e0e0e0;
+}
+
+
+.header span {
+    margin-right: 30px;
+    font-weight: bold;
+    color: red;
+}
+

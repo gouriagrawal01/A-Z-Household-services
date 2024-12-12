@@ -4,7 +4,7 @@ db=SQLAlchemy()
 
 #Customer
 class User(db.Model):
-	_tablename_="user"
+	__tablename__="user"
 	id=db.Column(db.Integer,primary_key=True)
 	email=db.Column(db.String,unique=True,nullable=False)
 	password=db.Column(db.String,nullable=False)
@@ -17,21 +17,21 @@ class User(db.Model):
 
 #Service
 class Service(db.Model):
-	_tablename_="service"
+	__tablename__="service"
 	id=db.Column(db.Integer,primary_key=True)
 	name=db.Column(db.String,nullable=False)
 	price=db.Column(db.Float,nullable=False,default=0.0)
 	time_required=db.Column(db.Integer,default=0)
 	description=db.Column(db.String,nullable=False)
 	service_req=db.relationship("Service_Request",cascade="all,delete",backref="service",lazy=True)
-	
+	service_prof=db.relationship("Professional",cascade="all,delete",backref="services",lazy=True)
 
 
 
 
 #Service_Professional
 class Professional(db.Model):
-	_tablename_="professional"
+	__tablename__="professional"
 	id=db.Column(db.Integer,primary_key=True)
 	email=db.Column(db.String,unique=True,nullable=False)
 	password=db.Column(db.String,nullable=False)
@@ -42,19 +42,23 @@ class Professional(db.Model):
 	experience=db.Column(db.Integer,nullable=False)
 	address=db.Column(db.String,nullable=False)
 	pin_code=db.Column(db.Integer,nullable=False)
+	rating=db.Column(db.Float,default=0.0)
+	resume_url=db.Column(db.String,nullable=False)
+	is_approved=db.Column(db.String,default="No")
 	service_req=db.relationship("Service_Request",cascade="all,delete",backref="professional",lazy=True)
+	
 
 #Service_Request
 class Service_Request(db.Model):
-	_tablename_="service_request"
+	__tablename__="service_request"
 	id=db.Column(db.Integer,primary_key=True)
 	service_name=db.Column(db.String,nullable=False)
 	service_id=db.Column(db.Integer,db.ForeignKey("service.id"),nullable=False)
 	customer_id=db.Column(db.Integer,db.ForeignKey("user.id"),nullable=False)
 	professional_id=db.Column(db.Integer,db.ForeignKey("professional.id"),nullable=False)
 	dor=db.Column(db.DateTime,nullable=False)
-	doc=db.Column(db.DateTime,nullable=False)
-	status=db.Column(db.String,nullable=False)
-	additional_request=db.Column(db.String,nullable=False)
-	feedback=db.Column(db.String,nullable=False)
+	doc=db.Column(db.DateTime)
+	status=db.Column(db.String,default="Requested")
+	additional_request=db.Column(db.String)
+	feedback=db.Column(db.String)
 

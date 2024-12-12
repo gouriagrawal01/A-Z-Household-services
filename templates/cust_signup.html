@@ -10,9 +10,9 @@
 </head>
 <body>
     <div class="my_container">
-        <h1 class="center">Cine World</h1>
+        <h1 class="center">Household Services</h1>
         <div class="my_panel">
-            <h2 class="center">Signup</h2>
+            <h2 class="center">Customer Signup</h2>
             <form action="/cust_signup" method="POST">
             <div class="input_form">
                 <div class="mb-3">
@@ -39,6 +39,7 @@
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Signup</button>
                     Existing User?<a href="/login">Login</a>
+                    <div class="error_msg">{{msg}}</div>
                   </div>             
             </div>
           </form>

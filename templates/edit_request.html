@@ -1,0 +1,32 @@
+{% extends "cust_layout.html" %}
+{% block content  %}
+  {% if service_request %}
+        <h2 class="center">Edit Service Request</h2>
+          <form action="/edit_request/{{service_request.id}}/{{name}}" method="POST">
+            <div class="input_form">
+                <div class="mb-3">
+                <label for="dor">Date of Request:</label>
+                <input type="datetime-local" id="dor" name="dor" value={{service_request.dor}}>
+            </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status:</label>
+                    <input type="text" name="status"  class="form-control" id="status" value="{{service_request.status}}">
+                </div>
+                <div class="mb-3">
+                    <label for="additional_request" class="form-label">Additional Request</label>
+                    <input type="text" class="form-control" name="additional_request" id="additional_request" value="{{service_request.additional_request}}">
+                </div>
+                <div class="mb-3">
+                    <label for="feedback" class="form-label">Feedback:</label>
+                    <input type="feedback" class="form-control" name="feedback" id="feedback" value="{{service_request.feedback}}">
+                </div>
+                
+                 
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <a href="/cust_dashboard/{{name}}" type="button" class="btn btn-primary">Cancel</a>             
+            </div>
+          </form>
+          {% endif %}
+{%endblock%}
