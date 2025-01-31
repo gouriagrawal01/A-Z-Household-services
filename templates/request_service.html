@@ -1,0 +1,31 @@
+{% extends "cust_layout.html" %}
+{% block content  %}
+            <h2 class="center">Service Request</h2>
+            {%if professionals%}
+            <form action="/request_service/{{service.id}}/{{name}}" method="POST">
+            <div class="input_form">
+                <div class="mb-3">
+                  
+                  <label for="professional">Choose a professional:</label>
+                  <select name="professional" id="professional">
+                    {% for professional in professionals  %}
+                  <option value="{{professional.id}}">{{professional.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="dor">Date of Request:</label>
+                <input type="datetime-local" class="form-control"  id="dor" name="dor"></div>
+                                  
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Book</button>
+                  </div>
+                  <a href="/cust_dashboard/{{name}}" type="button" class="btn btn-primary">Cancel</a>             
+            </div>
+          </form>
+
+          {% else %}
+          <h3 class="center"> No Professional Available for this service </h3>
+          {% endif %}
+
+          {% endblock  %}

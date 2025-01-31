@@ -1,0 +1,35 @@
+{% extends "cust_layout.html" %}
+{% block content  %}
+  {% if service_request %}
+        <h2 class="center">Close Service Request</h2>
+          <form action="/close_request_cust/{{service_request.id}}/{{name}}" method="POST">
+            <div class="input_form">
+                <div class="mb-3">
+                <label for="doc">Date of Completion:</label>
+                <input type="datetime-local" id="doc" name="doc">
+            </div>
+            <div class="mb-3">
+                    <label for="feedback" class="form-label">Feedback:</label>
+                    <input type="feedback" class="form-control" name="feedback" id="feedback">
+            </div>
+            <label for="rating" class="form-label">Rate the professional(1-5):</label>
+                  <select name="rating" id="rating">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+
+                  {% endfor %}
+                </select>
+              </div>
+                
+                 
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <a href="/cust_dashboard/{{name}}" type="button" class="btn btn-primary">Cancel</a>             
+            </div>
+          </form>
+          {% endif %}
+{%endblock%}

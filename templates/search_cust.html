@@ -1,0 +1,21 @@
+{% extends "cust_layout.html" %}
+{% block content  %}
+        <h2 class="center">Search</h2>
+          <form class=d-flex action="search_cust/{{name}}" method="POST">
+            <div>
+                <label for="option">Search by:</label>
+                  <select name="option" id="option">
+                    <option value="name">Name</option>
+                  <option value="location">Location</option>
+                  <option value="pin_code">Pin Code</option>                  
+                </select>
+              </div>
+            <div>
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_txt",id="search_txt">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                
+            
+                <a href="/cust_dashboard/{{name}}" type="button" class="btn btn-primary">Cancel</a>             
+            </div>
+          </form>
+{%endblock%}

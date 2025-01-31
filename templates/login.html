@@ -6,13 +6,16 @@
     <title>Login</title>
     <link rel="stylesheet" href="/static/styles/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
 </head>
 <body>
-    <div class="my_container">
-        <h1 class="center">Cine World</h1>
-        <div class="my_panel">
-            <h2 class="center">Login</h2>
+    <div class="">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+            <h1><p style="color:#00b8a9">HomePro Login</p></h1>
+            </blockquote>
+        </figure>
+        <div class="">
+            <!--<h3 class="center">Login</h3>-->
             <form action="/login" method="POST">
             <div class="input_form">
                 <div class="mb-3">
@@ -24,9 +27,10 @@
                     <input type="password" name="password" class="form-control" id="password" placeholder="password">
                   </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    New User?<a href="/cust_signup">Signup</a>
-                    New Professional?<a href="/prof_signup">Signup</a>
+                    <button type="submit" class="login_button" style="background:#ff6f00; align:center; padding:8px 12px;">Login</button> <br>
+                    New User?<a href="/cust_signup">Signup</a><br>
+                    New Professional?<a href="/prof_signup">Signup</a><br>
+                    <div class="error_msg">{{msg}}</div>
                   </div>             
             </div>
         </form>

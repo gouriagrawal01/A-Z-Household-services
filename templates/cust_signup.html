@@ -9,11 +9,15 @@
 
 </head>
 <body>
-    <div class="my_container">
-        <h1 class="center">Cine World</h1>
-        <div class="my_panel">
-            <h2 class="center">Signup</h2>
-            <form action="/cust_signup" method="POST">
+    <div class="">
+      <figure class="text-center">
+        <blockquote class="blockquote">
+        <h1><p style="color:#00b8a9">HomePro</p></h1>
+        <h3 class="center">Customer Signup</h3>
+        </blockquote>
+    </figure>
+            
+      <form action="/cust_signup" method="POST">
             <div class="input_form">
                 <div class="mb-3">
                     <label for="user_name" class="form-label">UserName(E-mail)</label>
@@ -37,8 +41,10 @@
                   </div>
                   
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Signup</button>
-                    Existing User?<a href="/login">Login</a>
+                  <button type="submit" class="login_button" style="background:#ff6f00; align:center; padding:8px 12px;">Submit</button> <br>
+                  <div class="a" style="padding:0">
+                    Existing User?<a href="/login">Login</a></div>
+                    <div class="error_msg">{{msg}}</div>
                   </div>             
             </div>
           </form>

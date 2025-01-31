@@ -1,0 +1,136 @@
+{% extends "prof_layout.html" %}
+{% block content %}
+
+    <div class="section">
+        <h3>Today Services</h3>
+        {% if service_requests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Contact Phone</th>
+                    <th>Location (with pin code)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service_request in service_requests %}
+                {% if service_request.status=="Requested" %}
+                <tr>
+                    <td>{{service_request.id}}</td>
+                    <td>{{service_request.user.name}}</td>
+                    <td>{{service_request.user.email}}</td>
+                    <td>{{service_request.user.address}},{{service_request.user.pin_code}}</td>
+                    <td><a href="/accept_service/{{service_request.id}}/{{name}}"  type="button"  class="btn btn-success">Accept</a>
+                            <a href="/reject_request/{{service_request.id}}/{{name}}" type="button" class="btn btn-danger">Reject</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>            
+        </table>
+        {% else %}
+        <h3 class="center">No Services Available</h3>
+        {%endif%}
+    </div>
+
+    <div class="section">
+        <h3>Accepted Services</h3>
+        {% if service_requests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Contact Phone</th>
+                    <th>Location (with pin code)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service_request in service_requests %}
+                {% if service_request.status=="Accepted" %}
+                <tr>
+                    <td>{{service_request.id}}</td>
+                    <td>{{service_request.user.name}}</td>
+                    <td>{{service_request.user.email}}</td>
+                    <td>{{service_request.user.address}},{{service_request.user.pin_code}}</td>
+                    <td><a href="/close_request/{{service_request.id}}/{{name}}"  type="button"  class="btn btn-success">Close</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>            
+        </table>
+        {% else %}
+        <h3 class="center">No Accepted Services Available</h3>
+        {%endif%}
+    </div>
+
+
+    <div class="section">
+        <h3>Rejected Services</h3>
+        {% if service_requests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Contact Phone</th>
+                    <th>Location (with pin code)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service_request in service_requests %}
+                {% if service_request.status=="Rejected" %}
+                <tr>
+                    <td>{{service_request.id}}</td>
+                    <td>{{service_request.user.name}}</td>
+                    <td>{{service_request.user.email}}</td>
+                    <td>{{service_request.user.address}},{{service_request.user.pin_code}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>            
+        </table>
+        {% else %}
+        <h3 class="center">No Services Available</h3>
+        {%endif%}
+    </div>
+
+    <div class="section">
+        <h3>Closed Services</h3>
+        {% if service_requests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Contact Phone</th>
+                    <th>Location (with pin code)</th>
+                    <th>Date</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service_request in service_requests %}
+                {% if service_request.status=="Closed" %}
+                <tr>
+                    <td>{{service_request.id}}</td>
+                    <td>{{service_request.user.name}}</td>
+                    <td>{{service_request.user.email}}</td>
+                    <td>{{service_request.user.address}},{{service_request.user.pin_code}}</td>
+                    <td>{{service_request.doc}}</td>
+                    <td>{{service_request.feedback}}</td>
+                    
+                </tr>
+                {% endif %}
+                {%endfor%}
+            </tbody>
+        </table>
+        {% else %}
+            <h3 class="center"> No service request available here</h3>
+        {% endif %}
+    </div>
+
+    {% endblock content %}
