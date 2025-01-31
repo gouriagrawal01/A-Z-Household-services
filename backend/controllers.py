@@ -1,5 +1,5 @@
 
-from flask import Flask,render_template,flash,request,url_for,redirect
+from flask import Flask,render_template,flash,flash,request,url_for,redirect,url_for,redirect
 from flask import current_app as app
 from .models import *
 from datetime import datetime
@@ -20,11 +20,13 @@ def signin():
         pwd=request.form.get("password")
         hash_pwd=hash(pwd)
         usr=User.query.filter_by(email=uname,password=pwd).first()
-        prof=Professional.query.filter_by(email=uname,password=pwd).first()       
+        prof=Professional.query.filter_by(email=uname,password=pwd).first()
+        
+        
         if usr and usr.role==0: #Admin
-            return redirect(url_for("admin_dashboard",name=uname,pwd=hash_pwd))
+            return redirect(url_for("admin_dashboard",name=uname))
         elif usr and usr.role==1: #Customer
-            return redirect(url_for("cust_dashboard",name=uname,pwd=hash_pwd))
+            return redirect(url_for("cust_dashboard",name=uname))
         elif prof : #professional
             if prof.is_approved=="Yes":
                 return redirect(url_for("prof_dashboard",name=uname))
@@ -74,28 +76,19 @@ def prof_signup():
     return render_template("professional_signup.html",msg="")
 
 
-@app.route("/admin_dashboard/<name>/<pwd>")
-def admin_dashboard(name,pwd):
-    if hash(User.password)==pwd:
-        services=get_services()
-        professionals=get_professionals()
-        service_requests=get_requests()
-        customers=get_customers()
-        return render_template("admin_dashboard.html",name=name,pwd=pwd,services=services,professionals=professionals,service_requests=service_requests,customers=customers)
-    else:
-        return render_template("login.html",msg="Invalid Credentials")
+@app.route("/admin_dashboard/<name>")
+def admin_dashboard(name):
+    services=get_services()
+    professionals=get_professionals()
+    service_requests=get_requests()
+    customers=get_customers()
+    return render_template("admin_dashboard.html",name=name,services=services,professionals=professionals,service_requests=service_requests,customers=customers)
 
-@app.route("/cust_dashboard/<name>/<pwd>")
-def cust_dashboard(name,pwd):
-    user=get_user(name)
-    if hash(user.password)==pwd:
-        service_id=get_user(name)
-        cust_id=service_id.id
-        service_requests_id=get_service_request_by_cust(cust_id)
-        services=get_services()
-        return render_template("cust_dashboard.html",name=name,pwd=pwd,services=services,service_requests=service_requests_id)
-    else:
-        return render_template("login.html",msg="Invalid Credentials")
+@app.route("/cust_dashboard/<name>")
+def cust_dashboard(name):
+    services=get_services()
+    service_requests=get_requests()
+    return render_template("cust_dashboard.html",name=name,services=services,service_requests=service_requests)
 
 @app.route("/prof_dashboard/<name>")
 def prof_dashboard(name):
@@ -123,9 +116,9 @@ def search(name):
         search_txt=request.form.get("search_txt")
         by_service=search_by_service(search_txt)
         by_professional=search_by_professional(search_txt)
-        print(by_service)
         if by_service:
             return render_template("admin_dashboard.html",name=name,services=by_service)
+        
         if by_professional:
             return render_template("admin_dashboard.html",name=name,professionals=by_professional)
 
@@ -276,16 +269,9 @@ def get_service_request(id):
     service_requests=Service_Request.query.filter_by(id=id).first()
     return service_requests
 
-
-def get_service_request_by_cust(id):
-    service_requests=Service_Request.query.filter_by(customer_id=id).all()
-    return service_requests
-
-
 def get_user(name):
     user=User.query.filter_by(email=name).first()
     return user
-
 
 def get_user_request(id):
     user=User.query.filter_by(id=id).first()
