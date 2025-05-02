@@ -6,7 +6,7 @@ from datetime import datetime
 from sqlalchemy import func
 from werkzeug.utils import secure_filename
 import os
-
+import matplotlib.pyplot as plt
 
 #app routes
 @app.route("/")
@@ -239,6 +239,16 @@ def request_service(service_id,name):
         return redirect(url_for("cust_dashboard",name=name))
     return render_template("request_service.html",name=name,professionals=professionals,service=service)
 
+@app.route("/admin_summary")
+def admin_summary():
+    plot=get_service_request_summary()
+    plot.savefig("./static/images/service_request_summary.jpeg")
+    plot.clf()
+    plot2=get_professional_rating()
+    plot2.savefig("./static/images/professiona_rating_summary.jpeg")
+    return render_template("admin_summary.html")
+
+
 
 @app.route("/edit_request/<id>/<name>",methods=["GET","POST"])
 def edit_request(id,name):
@@ -316,3 +326,28 @@ def get_requests():
 def get_customers():
     customers=User.query.all()
     return customers
+
+def get_service_request_summary():
+    status_data = db.session.query(
+        Service_Request.status, func.count(Service_Request.id)
+    ).group_by(Service_Request.status).all()
+    labels = [status for status, count in status_data]
+    counts = [count for status, count in status_data]
+    plt.bar(labels,counts,color='green',width=0.2)
+    plt.title("Service Requests Status")
+    plt.xlabel('Service Requests')
+    plt.ylabel('Count')
+    return plt
+
+def get_professional_rating():
+    ratings=Professional.query.all()
+    summary={}
+    for r in ratings:
+        summary[r.id]=r.rating
+    plt.bar(list(summary.keys()),list(summary.values()),color='blue',width=0.2)
+    plt.title("Professionals Rating")
+    plt.xlabel('Professional id')
+    plt.ylabel('Rating')
+    return plt
+    
+    
