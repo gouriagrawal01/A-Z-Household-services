@@ -1,2 +1,2 @@
-# A-Z-Household-services
-Household Services App
+# A-Z Household Services
+Household Services Web App
