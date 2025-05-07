@@ -6,7 +6,15 @@ from .models import *
 
 api=Api()
 
+def roles_list(roles):
+    roles_list=[]
+    for role in roles:
+        roles_list.append(role.name)
+    return roles_list
+
 class ShowApi(Resource):
+    @auth_required('token')
+    @roles_accepted('user','admin','professional')
     def get(self):
         service_requests=Service_Request.query.all()
         request_json=[]
@@ -14,7 +22,8 @@ class ShowApi(Resource):
             request_json.append({'id':r.id,'service_name':r.service_name,'service_id':r.service_id,'customer_id':r.customer_id,'professional_id':r.professional_id,'dor':str(r.dor),'doc':str(r.doc),'status':r.status,'additional_request':r.additional_request,'feedback':r.feedback})
         return request_json    
 
-
+    @auth_required('token')
+    @roles_required('user')
     def post(self):
         service_name=request.json.get('service_name')
         dor=request.json.get('dor')
@@ -30,7 +39,9 @@ class ShowApi(Resource):
         return {
                "message":"Service Request created successfully"
          },400
-
+    
+    @auth_required('token')
+    @roles_required('user')
     def put(self,service_id):
         service=Service_Request.query.get(service_id)
         if service:
@@ -48,6 +59,8 @@ class ShowApi(Resource):
             "message":"Service Request id not found"
         },400
     
+    @auth_required('token')
+    @roles_required('user')
     def delete(self,service_id):
         service=Service_Request.query.get(service_id)
         if service:
@@ -62,6 +75,8 @@ class ShowApi(Resource):
             },404
 
 class Show_Request(Resource):
+    @auth_required('token')
+    @roles_accepted('user','admin','professional')
     def get(self,id):
         r=Service_Request.query.filter(id=id).first()
         if r:

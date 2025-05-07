@@ -7,6 +7,9 @@ from sqlalchemy import func
 from werkzeug.utils import secure_filename
 import os
 import matplotlib.pyplot as plt
+from flask import current_app as app,jsonify,request
+from flask_security import auth_required,roles_accepted,current_user,roles_required
+from  flask_security import hash_password
 
 #app routes
 @app.route("/")
@@ -77,6 +80,8 @@ def prof_signup():
 
 
 @app.route("/admin_dashboard/<name>")
+@auth_required('token')
+@roles_required('admin')
 def admin_dashboard(name):
     services=get_services()
     professionals=get_professionals()
@@ -85,12 +90,16 @@ def admin_dashboard(name):
     return render_template("admin_dashboard.html",name=name,services=services,professionals=professionals,service_requests=service_requests,customers=customers)
 
 @app.route("/cust_dashboard/<name>")
+@auth_required('token')
+@roles_required('user')
 def cust_dashboard(name):
     services=get_services()
     service_requests=get_requests()
     return render_template("cust_dashboard.html",name=name,services=services,service_requests=service_requests)
 
 @app.route("/prof_dashboard/<name>")
+@auth_required('token')
+@roles_required('professional')
 def prof_dashboard(name):
     service_requests=get_requests()
     user=get_user_request(name) 
@@ -98,6 +107,8 @@ def prof_dashboard(name):
 
 
 @app.route("/service/<name>",methods=["GET","POST"])
+@auth_required('token')
+@roles_required('user','admin')
 def add_service(name):
     if request.method=="POST":
         service_name=request.form.get("service_name")
